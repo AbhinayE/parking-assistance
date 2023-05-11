@@ -1,0 +1,14 @@
+.crt {
+  display: flex;
+  flex-direction: column;
+}
+.nearest {
+  margin-top: 15vh;
+  text-align: center;
+}
+.nearest h1 {
+  font-size: 170px;
+}
+.nearest h2 {
+  font-size: 70px;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Lot Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+            max-width: 750px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .video-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .video-info p {
+            font-size: 20px;
+            margin: 0 0 20px 0;
+            flex: 1;
+            text-align: center;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let nearestSlotElement = document.getElementById("nearest-slot");
+            let googleMapsLinkElement = document.getElementById("google-maps-link");
+
+            setInterval(function () {
+                // Update nearest slot
+                fetch("/nearest_slot")
+                    .then((response) => response.text())
+                    .then((data) => {
+                        nearestSlotElement.textContent = data;
+                    });
+
+                // Update Google Maps link
+                fetch("/get_google_maps_link")
+                    .then((response) => response.text())
+                    .then((data) => {
+                        googleMapsLinkElement.href = data;
+                    });
+
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+    <h1>Parking Lot Management System</h1>
+    <div class="container">
+        <img src="/video_feed" alt="Video feed" />
+        <div class="video-info">
+            <p>Nearest Slot: <span id="nearest-slot">0</span></p>
+            <p><a id="google-maps-link" href="#" target="_blank">Google Maps Link</a></p>
+        </div>
+    </div>
+</body>
+</html>
